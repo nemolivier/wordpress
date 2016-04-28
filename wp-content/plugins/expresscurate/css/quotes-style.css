@@ -1,0 +1,60 @@
+
+blockquote ul, ol {
+    padding-left: 40px;
+}
+
+blockquote {
+    position: relative;
+    padding: 0 20px;
+    margin: 0 0 20px 10px;
+    clear: both;
+    border: none !important;
+}
+
+blockquote > * {
+    margin-left: 10px;
+}
+
+blockquote:before {
+    left: 0;
+    top: 0;
+    width: 12px;
+    height: 23px;
+    position: absolute;
+    display: inline-block;
+    background-position: 0 10px;
+    content: "";
+    clear: both;
+    transform:rotate(180deg);
+    -ms-transform:rotate(180deg);
+    -moz-transform:rotate(180deg);
+    -webkit-transform:rotate(180deg);
+    -o-transform:rotate(180deg);
+}
+
+blockquote:after ,
+blockquote:before{
+    background-size: auto 68px;
+    background-repeat: no-repeat;
+    background-image: url('../images/feed_icons.svg');
+}
+blockquote:after {
+    right: 0;
+    bottom: -13px;
+    width: 12px;
+    height: 23px;
+    text-align: right;
+    position: absolute;
+    display: inline-block;
+    background-position: 0 0;
+    content: "";
+    clear: both;
+}
+.expresscurate_FacebookEmbed{
+    display: block;
+    width: 450px;
+    height: 62px;
+    background: url("../images/facebookEmbedPlaceholder.png") #3B5998 no-repeat;
+    background-size: auto 25px;
+    background-position: center center;
+}

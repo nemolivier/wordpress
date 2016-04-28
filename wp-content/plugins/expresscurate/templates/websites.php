@@ -1,0 +1,53 @@
+<?php
+$feedManager = new ExpressCurate_FeedManager();
+$curated_links_rss = $feedManager->get_curated_links();
+?>
+<div class="expresscurate_topSources expresscurate_Styles wrap">
+  <div class="expresscurate_headBorderBottom expresscurate_headerPart expresscurate_OpenSansRegular">
+    <a href="admin.php?page=expresscurate_support" class="expresscurate_writeUs"><?php _e('Suggestions? ');?><span><?php _e('Submit here!');?></span></a>
+    <h2><?php _e(' Sources');?></h2>
+      <label class="pageDesc"><?php _e('Top sources where you have curated from.');?></label>
+  </div>
+  <div class="expresscurate_content_wrapper">
+    <?php
+    if (count($curated_links_rss['links'])) {
+      ?>
+      <ul class="expresscurate_columnsName">
+        <li class="mainTitle"><?php _e('Sources');?></li>
+        <li class="title expresscurate_floatRight"><?php _e('rss subscription status');?></li>
+        <li class="title expresscurate_floatRight expresscurate_marginRight30"><?php _e('# of curated posts');?></li>
+      </ul>
+      <ul class="expresscurate_URL">
+        <?php
+        foreach ($curated_links_rss['links'] as $key => $top_link) {
+          $tooltip_msg = 'Subscribe';
+          if ($top_link['feed_options']['feed_status'] == "rssStatusYes") {
+            $tooltip_msg = 'Subscribed';
+          } elseif ($top_link['feed_options']['feed_status'] == "rssStatusNo") {
+              $tooltip_msg = ' N/A';
+          }
+          ?>
+          <li>
+            <h3 class="expresscurate_topCuratedURL expresscurate_floatLeft"><?php echo $key ?></h3>
+            <span class="rssStatus expresscurate_floatRight <?php echo $top_link['feed_options']['feed_status'] ?> expresscurate_floatRight">rss
+                <?php if($tooltip_msg){ ?>
+                <span class="tooltip"><?php echo $tooltip_msg;?></span>
+              <?php } ?>
+            </span>
+            <span class="postsCount expresscurate_floatRight"><?php echo count($top_link['post_ids']) ?></span>
+            <input type="hidden" name="expresscurate_feed_url" value="<?php echo $top_link['feed_options']['feed_url'] ?>" />
+            <!--classes for rss status: rssStatusYes | rssStatusNo | rssStatusAdd -->
+              <div class="expresscurate_clear"></div>
+          </li>
+        <?php } ?>
+      </ul>
+    <?php } else {
+      ?>
+      <span class="expresscurate_notDefined">
+      <?php _e(' No Curated Post.'); ?> <a href="<?php echo admin_url(); ?>post-new.php"><?php _e('Curate New Post Now'); ?></a>.
+      </span>
+    <?php }
+    ?>
+  </div>
+  <!---->
+</div>
