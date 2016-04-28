@@ -41,9 +41,14 @@
   }
 }
 
-#global .btn a{
-  color: #fff;
+#global {
+  background-image: url('../images/globaldebout-banner.jpg');
+  background-size: cover;
+  .btn a {
+    color: #fff;
+  }
 }
+
 #manifesto,
 #participate,
 #rassemblements {

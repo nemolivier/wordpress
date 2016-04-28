@@ -1,4 +1,3 @@
-<?php ?>
 <div id="global" class="section">
 	<?php
 	$page_parent = get_field('homepage_global', 'option');
