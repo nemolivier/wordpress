@@ -26,31 +26,45 @@ if($page_parent->ID){
 	$pages_sub = get_pages($args);
 }
 ?>
-<div id="global" class="row">
+<div id="global">
 	<div class="global__text col-xs-12 col-sm-6">
 	<?php echo $excerpt; ?>
 	</div>
 	<div class="col-xs-12 col-sm-6">
-		<ul class="list-unstyled">
 		<?php
 		if ($pages_sub) :
-			$cols = 3;
-			$per_col = ceil(count($pages_sub) / $cols);
-			foreach ( $pages_sub as $p ) :
-				$content = apply_filters('the_content',$p->post_content);
-				$title = apply_filters('the_title',$p->post_title);
-				$permalink = get_permalink($p->ID);
-				$label = $title;
-				$page_lang_code = get_field('page_lang_code',$p->ID );
-				if($page_lang_code){
-					$label = $page_lang_code;
+			$links = [];
+			foreach ($pages_sub as $p) :
+				$links[] = [
+					'permalink' => get_permalink($p->ID),
+					'page_lang_code' => get_field('page_lang_code', $p->ID),
+				];
+			endforeach;
+			usort($links, function($a, $b) {
+				return strcasecmp($a['page_lang_code'], $b['page_lang_code']);
+			});
+			$per_col = ceil(count($pages_sub) / 3);
+			$cols = $tmp = [];
+			foreach ($links as $link) :
+				$tmp[] = $link;
+				if (count($tmp) == $per_col) {
+					$cols[] = $tmp;
+					$tmp = [];
 				}
-				?>
-				<li><a href="<?php echo $permalink; ?>"><?php echo $page_lang_code; ?></a></li>
-			<?php endforeach;
+			endforeach;
 		endif;
 		?>
-		</ul>
+		<div class="row">
+			<?php foreach ($cols as $items) : ?>
+				<div class="col-xs-4">
+				<ul class="list-unstyled">
+					<?php foreach ($items as $item) : ?>
+					<li><a href="<?php echo $item['permalink'] ?>"><?php echo $item['page_lang_code'] ?></a></li>
+					<?php endforeach; ?>
+				</ul>
+				</div>
+			<?php endforeach; ?>
+		</div>
 	</div>
 	<!-- <h2 class="section__title"><?php echo $title; ?></h2> -->
 	<!-- <div class="section__content">
