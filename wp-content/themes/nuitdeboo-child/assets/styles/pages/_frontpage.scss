@@ -44,8 +44,14 @@
 #global {
   background-image: url('../images/globaldebout-banner.jpg');
   background-size: cover;
-  .btn a {
+  min-height: 128px;
+  color: #fff;
+  a {
     color: #fff;
+  }
+  .global__text {
+    font-size: 32px;
+    font-family: 'AmaticSC';
   }
 }
 
