@@ -98,6 +98,7 @@ $(function() {
 
 function flamingo_inbound_submit_meta_box( $post ) {
 ?>
+
 <div class="submitbox" id="submitlink">
 <div id="major-publishing-actions">
 
@@ -153,6 +154,10 @@ function flamingo_contact_name_meta_box( $post ) {
 <td><input type="text" name="contact[last_name]" id="contact_last_name" value="<?php echo esc_attr( $post->get_prop( 'last_name' ) ); ?>" class="widefat" /></td>
 </tr>
 
+
+
+
+
 </tbody>
 </table>
 <?php
@@ -160,6 +165,9 @@ function flamingo_contact_name_meta_box( $post ) {
 
 function flamingo_inbound_fields_meta_box( $post ) {
 ?>
+
+
+
 <table class="widefat message-fields striped">
 <tbody>
 
@@ -172,6 +180,14 @@ function flamingo_inbound_fields_meta_box( $post ) {
 
 </tbody>
 </table>
+<div class="replybox">
+	<h1>repondre</h1>
+	<textarea>...
+	</textarea>
+	<input name="reply" type="submit" class="button-primary" id="reply" tabindex="4" accesskey="p" value="<?php echo esc_attr( __( 'Reply', 'flamingo' ) ); ?>" />
+
+</div>
+
 <?php
 }
 
@@ -189,6 +205,10 @@ function flamingo_inbound_meta_meta_box( $post ) {
 
 </tbody>
 </table>
+
+
+
+
 <?php
 }
 

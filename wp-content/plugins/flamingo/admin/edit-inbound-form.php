@@ -62,8 +62,14 @@ do_meta_boxes( null, 'side', $post );
 do_meta_boxes( null, 'normal', $post );
 do_meta_boxes( null, 'advanced', $post );
 ?>
+
+<input type="hidden" name="action" value="reply" />
+<input type="hidden" name="post" value="<?php echo (int) $post->id; ?>" />
+
+
 </div><!-- #post-body-content -->
 </div><!-- #post-body -->
+
 
 <?php if ( $post->id ) : ?>
 <input type="hidden" name="action" value="save" />
