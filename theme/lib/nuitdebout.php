@@ -1,5 +1,9 @@
 <?php
 
+require_once __DIR__.'/../vendor/autoload.php';
+
+use Goutte\Client;
+
 function nd_get_revolutionary_date()
 {
 
@@ -38,4 +42,45 @@ function getAttachmentThumb($id) {
 	$thumb =  get_post_thumbnail_id( $id );
 	$url = wp_get_attachment_image_src($thumb , [330, 180])[0];
 	return $url;
+}
+
+function openagenda_get_cities()
+{
+	$events = openagenda_get_events();
+
+	$cities = [];
+	foreach ($events as $event) {
+		$city = $event['city'];
+		$cities[] = $city;
+	}
+
+	return array_values(array_unique($cities));
+}
+
+function openagenda_get_events()
+{
+	if (!is_home()) {
+		return [];
+	}
+
+	static $openagenda_events;
+
+	if (!empty($openagenda_events)) {
+
+		return $openagenda_events;
+	}
+
+	$client = new Client();
+
+	$agenda_id = '27805494';
+
+	$client->request('GET', "https://openagenda.com/agendas/{$agenda_id}/events.json?oaq[from]=2016-05-06&oaq[to]=2016-05-06");
+
+	$content = $client->getResponse()->getContent();
+
+	$data = json_decode($content, true);
+
+	$openagenda_events = $data['events'];
+
+	return $openagenda_events;
 }
