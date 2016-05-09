@@ -23,6 +23,7 @@ $sage_includes = [
 
 	'acf/acf_options.php',
 	'lib/nuitdebout.php',
+	'lib/widgets/agenda.php',
 ];
 
 foreach ($sage_includes as $file) {

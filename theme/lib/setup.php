@@ -85,8 +85,6 @@ function widgets_init() {
     'after_title'   => '</h2>'
   ]);
 
-
-
   register_sidebar([
     'name'          => __('Footer', 'sage'),
     'id'            => 'sidebar-footer',
@@ -95,6 +93,9 @@ function widgets_init() {
     'before_title'  => '<h5>',
     'after_title'   => '</h5>'
   ]);
+
+  register_widget('NuitDebout\\Wordpress\\Widget\\Agenda');
+
 }
 add_action('widgets_init', __NAMESPACE__ . '\\widgets_init');
 
