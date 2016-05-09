@@ -1,4 +1,4 @@
-$NFS = ENV.has_key?('VM_NFS') ? ENV['VM_NFS'] != "false" : true
+$NFS = ENV.has_key?('VM_NFS') ? ENV['VM_NFS'] != "false" : false
 
 Vagrant.configure("2") do |config|
     # Configure the box to use
